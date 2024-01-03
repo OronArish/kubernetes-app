@@ -34,7 +34,7 @@ spec:
       volumes:
         - name: vpro-db-data
           awsElasticBlockStore:
-            volumeID: vol-08fdae842cee7b9e9
+            volumeID: vol-07a7154d6627079e8
             fsType: ext4
 
       initContainers:
