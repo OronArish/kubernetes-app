@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,7 +14,7 @@ spec:
       labels:
         app: vprodb
     spec:
-    containers:
+      containers:
       - name: vprodb
         image: oronops/vprofiledb:latest
         volumeMounts:
@@ -30,18 +29,18 @@ spec:
               secretKeyRef:
                 name: app-secret
                 key: db-pass
-    nodeSelector:
+      nodeSelector:
         zone: us-west-1a
-    volumes:
+      volumes:
       - name: vpro-db-data
         awsElasticBlockStore:
           volumeID: vol-08fdae842cee7b9e9
           fsType: ext4
 
     initContainers:
-      - name: busybox
-        image: busybox:latest
-        args: ["rm", "-rf", "/var/lib/mysql/lost+found"]
-        volumeMounts:
-          - name: vpro-db-data
-            mountPath: /var/lib/mysql
+    - name: busybox
+      image: busybox:latest
+      args: ["rm", "-rf", "/var/lib/mysql/lost+found"]
+      volumeMounts:
+      - name: vpro-db-data
+        mountPath: /var/lib/mysql
